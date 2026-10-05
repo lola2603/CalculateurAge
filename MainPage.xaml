@@ -9,9 +9,27 @@
             <Entry Text="{Binding Nom, Mode=TwoWay}" Placeholder="Votre nom"/>
             <Label Text="Date de naissance" FontSize="16"/>
             <DatePicker Date="{Binding DateNaissance}"/>
-            <Button Text="Calculer" Command="{Binding CalculerCommand}"/>
-            <Label Text="{Binding Resultat}" FontSize="20"
-                   IsVisible="{Binding ResultatVisible}"/>
+            <Label Text="{Binding Erreur}" FontAttributes="Italic"/>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button Grid.Column="0" Text="Calculer" Command="{Binding CalculerCommand}"/>
+                <Button Grid.Column="1" Text="Effacer" Command="{Binding EffacerCommand}"/>
+            </Grid>
+
+            <VerticalStackLayout Spacing="6" IsVisible="{Binding ResultatVisible}">
+                <Label Text="{Binding Resultat}" FontSize="20"/>
+                <Label Text="{Binding Message}" FontSize="18" FontAttributes="Bold"/>
+                <Label Text="{Binding JoursAnniversaire}" FontSize="16"/>
+            </VerticalStackLayout>
+
+            <Label Text="Historique" FontSize="16" FontAttributes="Bold"/>
+            <CollectionView ItemsSource="{Binding Historique}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Label Text="{Binding .}" Padding="0,4"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
